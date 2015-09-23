@@ -91,7 +91,6 @@ public class SenhaDao {
 				senha.setStatus(rs.getString("STATUS"));
 				senha.setTipo(rs.getString("TIPO"));
 			} else {
-				senha.setNumero((long) 0);
 				senha.setTipo(tipo);
 				senha.setStatus("S");
 				senha.setId((long) 0);
