@@ -1,11 +1,13 @@
 $(document).ready(function() {
-	setInterval(atualizaSenha, 1300);
+	atualizaSenha();
 	$("#atendNormal").click(function() {
 		gerarSenha("N");
 	});
 	$("#atendPreferencial").click(function() {
 		gerarSenha("P");
 	});
+	setInterval(atualizaSenha, 3000);
+
 });
 
 function atualizaSenha() {

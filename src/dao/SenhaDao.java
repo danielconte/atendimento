@@ -12,6 +12,7 @@ import model.Senha;
 
 public class SenhaDao {
 	private Connection connection;
+	
 	public void adiciona(Senha senha){
 		String sql = " INSERT INTO SENHA "+
 				"(TIPO,NUMERO,STATUS) VALUES (?,?,?)";
@@ -23,7 +24,7 @@ public class SenhaDao {
 			stmt.setString(3, senha.getStatus());
 			stmt.executeQuery();
 			stmt.close();
-			connection.close();
+			this.connection.close();
 		} catch (SQLException e ){
 			throw new RuntimeException(e);
 		} 
@@ -37,7 +38,8 @@ public class SenhaDao {
 			stmt.setString(1,senha.getStatus());
 			stmt.setLong(2,senha.getId());
 			stmt.execute();
-			stmt.close();			
+			stmt.close();	
+			this.connection.close();
 		} catch (SQLException e){
 			throw new RuntimeException(e);
 		}
@@ -62,11 +64,10 @@ public class SenhaDao {
 			} else {
 				senha.setNumero((long) 0);
 				senha.setTipo("-");
-
 			}
 			rs.close();
 			stmt.close();
-			connection.close();
+			this.connection.close();
 			return senha;
 		} catch (SQLException e){
 			throw new RuntimeException(e);
@@ -90,11 +91,14 @@ public class SenhaDao {
 				senha.setStatus(rs.getString("STATUS"));
 				senha.setTipo(rs.getString("TIPO"));
 			} else {
-
+				senha.setNumero((long) 0);
+				senha.setTipo(tipo);
+				senha.setStatus("S");
+				senha.setId((long) 0);
 			}
 			rs.close();
 			stmt.close();
-			connection.close();
+			this.connection.close();
 			return senha;
 		} catch (SQLException e){
 			throw new RuntimeException(e);
@@ -122,7 +126,7 @@ public class SenhaDao {
 			
 			rs.close();
 			stmt.close();
-			connection.close();
+			this.connection.close();
 			return senhas;
 		} catch (SQLException e){
 			throw new RuntimeException(e);

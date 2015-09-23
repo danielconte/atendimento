@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	setInterval(atualizaSenha,1300);
+	atualizaSenha();
+	setInterval(atualizaSenha,3000);
 });
 
 function atualizaSenha() {
